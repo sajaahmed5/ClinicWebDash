@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 2: Changes in Patients Over Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #donut-chart, #line-chart, #horizontal-bar1, #horizontal-bar2 {
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .nav-links {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dashboard 2: Changes in Patients Over Time</h1>
+
+<div class="dashboard-container">
+
+    <!-- Donut chart for the number of patients based on events -->
+    <div id="donut-chart"></div>
+
+    <!-- Line chart for the number of patients in events over the years -->
+    <div id="line-chart"></div>
+
+    <!-- Horizontal bar chart for top events based on sum of event duration -->
+    <div id="horizontal-bar1"></div>
+
+    <!-- Horizontal bar chart for top 3 events with patients attendance -->
+    <div id="horizontal-bar2"></div>
+
+    <!-- Navigation to next page -->
+    <div class="nav-links">
+        <a href="dashboard1.html">Previous Dashboard</a> | <a href="dashboard3.html">Next Dashboard: Patients with Orthodontics</a>
+    </div>
+
+</div>
+
+<script>
+    // Donut chart options for the number of patients based on events
+    var donutOptions = {
+        chart: {
+            type: 'donut',
+            height: 400
+        },
+        series: [4875, 4654, 4399, 3748, 1910, 28],
+        labels: [1,6,4,7,25,23],
+        colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0', '#FEB019'],
+        title: {
+            text: 'Number of Patients Based on Events'
+        }
+    };
+
+    // Render the donut chart
+    var donutChart = new ApexCharts(document.querySelector("#donut-chart"), donutOptions);
+    donutChart.render();
+
+    // Line chart options for the number of patients in events over the years
+    var lineOptions = {
+        chart: {
+            type: 'line',
+            height: 400
+        },
+        series: [{
+            name: 'Number of Patients',
+            data: [2378, 12759, 12747, 12005, 12633, 9854, 11033, 9726, 9356, 5218]
+        }],
+        xaxis: {
+            categories: ['2015','2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+            title: {
+                text: 'Year'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Number of Patients'
+            }
+        },
+        colors: ['#008FFB'],
+        stroke: {
+            curve: 'smooth'
+        }
+    };
+
+    // Render the line chart
+    var lineChart = new ApexCharts(document.querySelector("#line-chart"), lineOptions);
+    lineChart.render();
+
+    // Horizontal bar chart options for top events based on sum of event duration
+    var horizontalBarOptions1 = {
+        chart: {
+            type: 'bar',
+            height: 400,
+            horizontal: true
+        },
+        series: [{
+            name: 'Duration (Minutes)',
+            data: [567050, 158595, 69840, 40925, 24225, 23405, 10200, 9150, 8130, 5460, 3825]
+        }],
+        xaxis: {
+            categories: ['Orthodontie', 'Plombage', 'DRV', 'PRV', 'Détartrage', 'Es. ac Polymérisation','Es. Céramique','Prise d`empreinte', 'Es. Faux Moignon', 'Es. Chape Métallique','Es. Chassis Métallique'],
+            title: {
+                text: 'Event Name'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Sum of Event Duration (Minutes)'
+            }
+        },
+        dataLabels: {
+                    enabled: false   // Disable data labels
+        },
+        colors: ['#FF4560'],
+        legend: {
+            position: 'top'
+        }
+    };
+
+    // Render the horizontal bar chart for top events by duration
+    var horizontalBar1 = new ApexCharts(document.querySelector("#horizontal-bar1"), horizontalBarOptions1);
+    horizontalBar1.render();
+
+    // Horizontal bar chart options for top 3 events with patients attendance
+    var horizontalBarOptions2 = {
+        chart: {
+            type: 'bar',
+            height: 400,
+            horizontal: true
+        },
+        series: [{
+            name: 'Patients',
+            data: [41404, 18983, 14782]
+        }],
+        xaxis: {
+            categories: ['Orthodontie', 'Orthodentie', 'Plombage'],
+            title: {
+                text: 'Event Name'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Top 3 Events with Patient Attendance'
+            }
+        },
+        dataLabels: {
+                    enabled: false   // Disable data labels
+        },
+        colors: ['#008FFB'],
+        legend: {
+            position: 'top'
+        }
+    };
+
+    // Render the horizontal bar chart for top 3 events by patient attendance
+    var horizontalBar2 = new ApexCharts(document.querySelector("#horizontal-bar2"), horizontalBarOptions2);
+    horizontalBar2.render();
+</script>
+
+</body>
+</html>

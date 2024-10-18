@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 3: Patients with Orthodontics and Pricing</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+        }
+
+        .card h3 {
+            color: #007bff;
+        }
+
+        #bar-chart, #pie-chart {
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .nav-links {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dashboard 3: Patients with Orthodontics and Pricing</h1>
+
+<div class="dashboard-container">
+
+    <!-- Cards showing standard, min, and max prices for each procedure -->
+    <div class="cards-container">
+        <div class="card">
+            <h3>Consultation</h3>
+            <p>Standard Price: 200</p>
+            <p>Min Price Paid: 100</p>
+            <p>Max Price Paid: 500</p>
+        </div>
+        <div class="card">
+            <h3>Contrôle</h3>
+            <p>Standard Price: 444</p>
+            <p>Min Price Paid: 7,500</p>
+            <p>Max Price Paid: 11,500</p>
+        </div>
+        <div class="card">
+            <h3>Extraction</h3>
+            <p>Standard Price: 300</p>
+            <p>Min Price Paid: 0</p>
+            <p>Max Price Paid: 18,000</p>
+        </div>
+    </div>
+
+    <div class="cards-container">
+        <div class="card">
+            <h3>Opération</h3>
+            <p>Standard Price: 200</p>
+            <p>Min Price Paid: 200</p>
+            <p>Max Price Paid: 10,500</p>
+        </div>
+        <div class="card">
+            <h3>Orthodontie</h3>
+            <p>Standard Price: 200</p>
+            <p>Min Price Paid: 0</p>
+            <p>Max Price Paid: 40,000</p>
+        </div>
+        <div class="card">
+            <h3>Prothèse</h3>
+            <p>Standard Price: 200</p>
+            <p>Min Price Paid: 0</p>
+            <p>Max Price Paid: 21,500</p>
+        </div>
+        <div class="card">
+            <h3>Soins</h3>
+            <p>Standard Price: 200</p>
+            <p>Min Price Paid: 0</p>
+            <p>Max Price Paid: 64,000</p>
+        </div>
+    </div>
+
+    <!-- Bar chart for total income by procedure -->
+    <div id="bar-chart"></div>
+
+    <!-- Pie chart for the distribution of medical procedures -->
+    <div id="pie-chart"></div>
+
+    <!-- Navigation to next page -->
+    <div class="nav-links">
+        <a href="dashboard2.html">Previous Dashboard</a> | <a href="dashboard4.html">Next Dashboard: Events and Revenue</a>
+    </div>
+
+</div>
+
+<script>
+    // Bar chart options for total income by procedure
+    var barOptions = {
+        chart: {
+            type: 'bar',
+            height: 400
+        },
+        series: [{
+            name: 'Total Income',
+            data: [24271580.3, 7558151, 717550, 90250, 56050, 19000, 1800]
+        }],
+        xaxis: {
+            categories: ['Soins', 'Orthodontie', 'Prothèse', 'Extraction', 'Opération', 'Contrôle', 'Consultation'],
+            title: {
+                text: 'Medical Procedure'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Total Income'
+            }
+        },
+        dataLabels: {
+                    enabled: false   // Disable data labels
+        },
+        colors: ['#008FFB', '#FF4560', '#00E396', '#FEB019', '#775DD0', '#F86624', '#A93EE6'],
+        legend: {
+            position: 'top'
+        }
+    };
+
+    // Render the bar chart
+    var barChart = new ApexCharts(document.querySelector("#bar-chart"), barOptions);
+    barChart.render();
+
+    // Pie chart options for distribution of medical procedures
+    var pieOptions = {
+        chart: {
+            type: 'pie',
+            height: 400
+        },
+        series: [11187, 776, 238, 216, 14, 10, 2],
+        labels: ['Soins', 'Orthodontie', 'Extraction', 'Prothèse', 'Consultation', 'Opération', 'Contrôle'],
+        colors: ['#008FFB', '#FF4560', '#00E396', '#FEB019', '#775DD0', '#F86624', '#A93EE6'],
+        title: {
+            text: 'Distribution of Medical Procedures'
+        }
+    };
+
+    // Render the pie chart
+    var pieChart = new ApexCharts(document.querySelector("#pie-chart"), pieOptions);
+    pieChart.render();
+</script>
+
+</body>
+</html>

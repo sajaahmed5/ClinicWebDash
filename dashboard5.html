@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 5: Revenue and Events</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #line-chart, #bar-chart1, #clustered-bar-chart {
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .nav-links {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dashboard 5: Revenue and Events</h1>
+
+<div class="dashboard-container">
+
+    <!-- Line chart for total revenue per year -->
+    <div id="line-chart"></div>
+
+    <!-- Bar chart for top events based on sum of event duration -->
+    <div id="bar-chart1"></div>
+
+    <!-- Bar chart for top 3 events with patients attendance -->
+    <div id="clustered-bar-chart"></div>
+
+    <!-- Navigation to previous dashboards -->
+    <div class="nav-links">
+        <a href="dashboard4.html">Previous Dashboard</a>
+    </div>
+
+</div>
+
+<script>
+    // Line chart options for total revenue per year
+    var lineOptions = {
+        chart: {
+            type: 'line',
+            height: 400
+        },
+        series: [{
+            name: 'Total Revenue',
+            data: [3635001, 3794380, 3543950.3, 3670000, 4597350, 3560100, 2847550, 2881650, 2621950]
+        }],
+        xaxis: {
+            categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021','2022', '2023'],
+            title: {
+                text: 'Year'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Total Revenue'
+            }
+        },
+        colors: ['#00E396'],
+        stroke: {
+            curve: 'smooth'
+        },
+        title: {
+            text: 'Total Revenue Over the Years',
+            align: 'center'
+        }
+    };
+
+    // Render the line chart for total revenue per year
+    var lineChart = new ApexCharts(document.querySelector("#line-chart"), lineOptions);
+    lineChart.render();
+
+    // Bar chart options for Year and CountZeros
+    var barOptions1 = {
+        chart: {
+            type: 'bar',
+            height: 400
+        },
+        series: [{
+            name: 'Count of Zeros',
+            data: [22, 41, 16, 6]
+        }],
+        xaxis: {
+            categories: ['2015', '2016', '2017', '2018'],
+            title: {
+                text: 'Year'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Count of Zeros'
+            }
+        },
+        colors: ['#FF4560'],
+        title: {
+            text: 'Count of Zeros by Year',
+            align: 'center'
+        }
+    };
+
+    // Render the first bar chart for Year and CountZeros
+    var barChart1 = new ApexCharts(document.querySelector("#bar-chart1"), barOptions1);
+    barChart1.render();
+
+     // Clustered bar chart options for Year and Count of acte_id max per name
+     var clusteredBarOptions = {
+        chart: {
+            type: 'bar',
+            height: 400,
+            stacked: false
+        },
+        series: [
+            {
+                name: 'Consultation',
+                data: [1, 0, 0, 13, 0, 0]
+            },
+            {
+                name: 'Contrôle',
+                data: [2, 0, 0, 0, 0, 0]
+            },
+            {
+                name: 'Extraction',
+                data: [10, 134, 65, 23, 3, 2]
+            },
+            {
+                name: 'Opération',
+                data: [9, 0, 0, 0, 0, 1]
+            },
+            {
+                name: 'Orthodotntie',
+                data: [396, 207, 96, 68, 1, 6]
+            },
+            {
+                name: 'Prothèse',
+                data: [28, 101, 49, 29, 1, 2]
+            },
+            {
+                name: 'Soins',
+                data: [299, 1162, 1033, 1492, 1769, 1497]
+            }
+        ],
+        xaxis: {
+            categories: ['2015', '2016', '2017', '2018', '2019', '2020'],
+            title: {
+                text: 'Year'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Count of acte_id max per name'
+            }
+        },
+        colors: ['#008FFB', '#FF4560', '#00E396', '#FEB019', '#775DD0', '#F86624', '#A93EE6'],
+        title: {
+            text: 'Count of acte_id max per name by Year',
+            align: 'center'
+        },
+        dataLabels: {
+                    enabled: false   // Disable data labels
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '45%',
+                distributed: false
+            }
+        }
+    };
+
+    // Render the clustered bar chart for Year and Count of acte_id max per name
+    var clusteredBarChart = new ApexCharts(document.querySelector("#clustered-bar-chart"), clusteredBarOptions);
+    clusteredBarChart.render();
+</script>
+
+</body>
+</html>
